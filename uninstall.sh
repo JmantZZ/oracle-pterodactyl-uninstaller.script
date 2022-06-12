@@ -45,39 +45,39 @@ sudo apt remove -y python3-certbot-nginx
 echo -e "${YELLOW}Removing Dependencies${NC}"
 apt update
 apt remove -y redis-server
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y redis-tools
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y php8.1
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y php8.1-zip
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y php8.1-xml
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y php8.1-mysql
-sudo apt autoremove
+sudo apt autoremove -y
 apt remove -y php8.1-mbstring
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y php8.1-gd
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y php8.1-fpm 
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y php8.1-curl
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y php8.1-common
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y php8.1-cli
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y php8.1-bcmath
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y mariadb-server 
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y nginx
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y git
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y unzip
-sudo apt autoremove
+sudo apt autoremove -y 
 apt remove -y php8.0
 apt remove -y php8.0-bcmath
 apt remove -y php8.0-cli
@@ -89,7 +89,7 @@ apt remove -y php8.0-mbstring
 apt remove -y php8.0-mysql
 apt remove -y php8.0-xml
 apt remove -y php8.0-zip
-sudo apt autoremove
+sudo apt autoremove  -y 
 
 sudo apt-get purge -y docker-ce-rootless-extras docker-compose-plugin docker-ce docker-ce-cli
 sudo apt-get autoremove -y --purge docker-ce-rootless-extras docker-compose-plugin docker-ce docker-ce-cli
