@@ -134,20 +134,20 @@ sudo apt -y autoremove
 sudo apt remove -y python3-certbot-nginx
 sudo apt -y autoremove
 
-        echo -e "${YELLOW}>>Removing add-apt-repository${NC}"
-        apt -y remove software-properties-common curl apt-transport-https ca-certificates gnupg
+echo -e "${YELLOW}>>Removing add-apt-repository${NC}"
+apt -y remove software-properties-common curl apt-transport-https ca-certificates gnupg
 
-        echo -e "${YELLOW}>>Removing composer${NC}"
-        rm /usr/local/bin/composer
+echo -e "${YELLOW}>>Removing composer${NC}"
+rm /usr/local/bin/composer
 
 
-        rm -rf /etc/apt/sources.list.d/
-        cd /
-        mkdir /etc/apt/sources.list.d/
+rm -rf /etc/apt/sources.list.d/
+cd /
+mkdir /etc/apt/sources.list.d/
 
-        apt remove -y figlet toilet
-        sudo apt -y autoremove
+apt remove -y figlet toilet
+sudo apt -y autoremove
 
-        echo -e "${GREEN}PANEL HAS BEEN FULLY UNINSTALLED${NC}"
-    fi
-    sleep 5
+echo -e "${GREEN}PANEL HAS BEEN FULLY UNINSTALLED${NC}"
+fi
+sleep 5
