@@ -20,51 +20,49 @@ echo -e "${YELLOW}Remove remove entire pterodactyl panel, including dependencies
 read COMPLETE_REMOVAL_BOOLEAN
 
 if [ "$COMPLETE_REMOVAL_BOOLEAN" = "yes" ]; then
-    echo -e "${YELLOW}Unlinking and disabling redis and pteroq services..${NC}"
+    echo -e "${YELLOW}>>Unlinking and disabling redis and pteroq services..${NC}"
     unlink /etc/systemd/system/redis.service
     unlink /etc/systemd/system/pteroq.service 
     sudo systemctl disable --now redis-server
     sudo systemctl disable --now pteroq.service
 
-    echo -e "${YELLOW}Stopping nginx...${NC}"
+    echo -e "${YELLOW}>>Stopping nginx...${NC}"
     systemctl stop nginx
 
-    echo -e "${YELLOW}Disabling wings and docker${NC} "
+    echo -e "${YELLOW}>>Disabling wings and docker${NC} "
     systemctl disable --now wings
     systemctl disable --now docker
 
-    echo -e "${YELLOW}Deleting redis,php and mariadb repositories${NC}"
+    echo -e "${YELLOW}>>Deleting redis,php and mariadb repositories${NC}"
     add-apt-repository -r -y ppa:ondrej/php
     add-apt-repository -r -y ppa:redislabs/redis
 
-    echo -e "${YELLOW}Deleting database and database user${NC}"
+    echo -e "${YELLOW}>>Deleting database and database user${NC}"
     mysql -u root -e "DROP DATABASE IF EXISTS panel;"
     mysql -u root -e "DROP USER IF EXISTS pterodactyl;"
 
     echo -e "${YELLOW}Deleting pterodactyl user${NC}"
     cd /
     cd /var/www/pterodactyl
-    php artisan p:user:delete {--user=stam}
+    php artisan p:user:delete --user=stam
 
-    echo -e "${CYAN}Deleting Pterodactyl files${NC}"
-    echo -e "${CYAN}Deleting pteroq.service${NC}"
+    echo -e "${CYAN}>>Deleting Pterodactyl files${NC}"
+    echo -e "${CYAN}>>Deleting pteroq.service${NC}"
     rm /etc/systemd/system/pteroq.service
-    echo -e "${CYAN}Deleting pterodactyl.conf${NC}"
+    echo -e "${CYAN}>>Deleting pterodactyl.conf${NC}"
     rm /etc/nginx/sites-available/pterodactyl.conf
     rm /etc/nginx/sites-enabled/pterodactyl.conf
-    echo -e "${CYAN}Deleting grub${NC}"
+    echo -e "${CYAN}>>Deleting grub${NC}"
     rm /etc/default/grub
-    echo -e "${CYAN}Deleting pterodactyl files /etc/pterodacty${NC}"
+    echo -e "${CYAN}>>Deleting pterodactyl files /etc/pterodacty${NC}"
     rm -rf /etc/pterodactyl
-    echo -e "${CYAN}Deleting wings.service${NC}"
-    rm /etc/systemd/system/wings.service
-    echo -e "${CYAN}Deleting pterodactyl files /var/www/pterodactyl${NC}"
+    echo -e "${CYAN}>>Deleting pterodactyl files /var/www/pterodactyl${NC}"
     rm -rf /var/www/pterodactyl
 
     sudo apt remove -y certbot
     sudo apt remove -y python3-certbot-nginx
 
-    echo -e "${YELLOW}Removing${NC}${LRED}ALL${NC}${YELLOW}Dependencies${NC}"
+    echo -e "${YELLOW}>>Removing${NC}${LRED}ALL${NC}${YELLOW}Dependencies${NC}"
     apt update
     apt remove -y redis-server
     sudo apt autoremove -y 
@@ -112,15 +110,21 @@ if [ "$COMPLETE_REMOVAL_BOOLEAN" = "yes" ]; then
     sudo apt remove -y python3-certbot-nginx
     sudo apt -y autoremove
 
-    echo -e "${YELLOW}Removing add-apt-repository${NC}"
+    echo -e "${YELLOW}>>Removing add-apt-repository${NC}"
     apt -y remove software-properties-common curl apt-transport-https ca-certificates gnupg
 
-    echo -e "${YELLOW}Removing composer${NC}"
+    echo -e "${YELLOW}>>Removing composer${NC}"
     rm /usr/local/bin/composer
+
+
+    rm -rf /etc/apt/sources.list.d/
+    cd /
+    mkdir /etc/apt/sources.list.d/
 
     apt remove -y figlet toilet
     sudo apt -y autoremove
 
+     /etc/apt/sources.list.d/
     echo -e "${GREEN}PANEL HAS BEEN FULLY UNINSTALLED${NC}"
 fi
 sleep 5
